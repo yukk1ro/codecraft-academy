@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Achievements - CodeCraft Academy</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="/">
+          <i class="fas fa-code"></i> CodeCraft Academy
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/challenges">Challenges</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/leaderboard">Leaderboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/community">Community</a>
+            </li>
+          </ul>
+          <div class="navbar-nav" id="authButtons">
+            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link" href="/register">Register</a>
+          </div>
+          <div class="navbar-nav d-none" id="userMenu">
+            <div class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="userDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                <img src="" alt="Avatar" class="avatar" id="userAvatar" />
+                <span id="username"></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                <li><a class="dropdown-item" href="/progress">Progress</a></li>
+                <li>
+                  <a class="dropdown-item active" href="/achievements"
+                    >Achievements</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#" id="logoutBtn">Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Achievements Section -->
+    <section class="achievements-section py-5">
+      <div class="container">
+        <div class="row">
+          <!-- Main Content -->
+          <div class="col-lg-8">
+            <!-- Progress Overview -->
+            <div class="card mb-4">
+              <div class="card-body">
+                <h2 class="card-title mb-4">Your Achievements</h2>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="text-center">
+                      <h3 id="totalAchievements">0</h3>
+                      <p class="text-muted">Total Achievements</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-center">
+                      <h3 id="completedAchievements">0</h3>
+                      <p class="text-muted">Completed</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-center">
+                      <h3 id="inProgressAchievements">0</h3>
+                      <p class="text-muted">In Progress</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Achievements List -->
+            <div class="card">
+              <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="card-title mb-0">All Achievements</h5>
+                  <div class="btn-group">
+                    <button
+                      class="btn btn-outline-primary active"
+                      data-filter="all"
+                    >
+                      All
+                    </button>
+                    <button
+                      class="btn btn-outline-primary"
+                      data-filter="completed"
+                    >
+                      Completed
+                    </button>
+                    <button
+                      class="btn btn-outline-primary"
+                      data-filter="in-progress"
+                    >
+                      In Progress
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div id="achievementsList">
+                  <!-- Achievements will be loaded dynamically -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sidebar -->
+          <div class="col-lg-4">
+            <!-- Recent Achievements -->
+            <div class="card mb-4">
+              <div class="card-header">
+                <h5 class="card-title mb-0">Recent Achievements</h5>
+              </div>
+              <div class="card-body">
+                <div id="recentAchievements">
+                  <!-- Recent achievements will be loaded dynamically -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Achievement Categories -->
+            <div class="card mb-4">
+              <div class="card-header">
+                <h5 class="card-title mb-0">Categories</h5>
+              </div>
+              <div class="card-body">
+                <div class="list-group" id="achievementCategories">
+                  <!-- Categories will be loaded dynamically -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Achievement Tips -->
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title mb-0">Tips</h5>
+              </div>
+              <div class="card-body">
+                <ul class="list-unstyled">
+                  <li class="mb-2">
+                    <i class="fas fa-lightbulb text-warning me-2"></i>
+                    Complete challenges to earn achievements
+                  </li>
+                  <li class="mb-2">
+                    <i class="fas fa-lightbulb text-warning me-2"></i>
+                    Participate in community discussions
+                  </li>
+                  <li class="mb-2">
+                    <i class="fas fa-lightbulb text-warning me-2"></i>
+                    Help other users solve problems
+                  </li>
+                  <li class="mb-2">
+                    <i class="fas fa-lightbulb text-warning me-2"></i>
+                    Maintain a daily streak
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Achievement Modal -->
+    <div class="modal fade" id="achievementModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Achievement Details</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="text-center mb-4">
+              <img
+                src=""
+                alt="Achievement"
+                id="achievementIcon"
+                class="mb-3"
+                style="width: 64px; height: 64px"
+              />
+              <h4 id="achievementName"></h4>
+              <p class="text-muted" id="achievementDescription"></p>
+            </div>
+            <div class="progress mb-3">
+              <div
+                class="progress-bar"
+                id="achievementProgress"
+                role="progressbar"
+                style="width: 0%"
+              ></div>
+            </div>
+            <div class="d-flex justify-content-between">
+              <small class="text-muted" id="achievementProgressText"></small>
+              <small class="text-muted" id="achievementStatus"></small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h5>CodeCraft Academy</h5>
+            <p>
+              Learn programming through interactive challenges and real-world
+              projects.
+            </p>
+          </div>
+          <div class="col-md-4">
+            <h5>Quick Links</h5>
+            <ul class="list-unstyled">
+              <li><a href="/about" class="text-white">About Us</a></li>
+              <li><a href="/contact" class="text-white">Contact</a></li>
+              <li><a href="/faq" class="text-white">FAQ</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h5>Connect With Us</h5>
+            <div class="social-links">
+              <a href="#" class="text-white me-3"
+                ><i class="fab fa-github"></i
+              ></a>
+              <a href="#" class="text-white me-3"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="text-white"><i class="fab fa-discord"></i></a>
+            </div>
+          </div>
+        </div>
+        <hr class="my-4" />
+        <div class="text-center">
+          <p class="mb-0">
+            &copy; 2024 CodeCraft Academy. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/achievements.js"></script>
+  </body>
+</html>

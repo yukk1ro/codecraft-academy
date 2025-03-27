@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leaderboard - CodeCraft Academy</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="/">
+          <i class="fas fa-code"></i> CodeCraft Academy
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/challenges">Challenges</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/leaderboard">Leaderboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/community">Community</a>
+            </li>
+          </ul>
+          <div class="navbar-nav" id="authButtons">
+            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link" href="/register">Register</a>
+          </div>
+          <div class="navbar-nav d-none" id="userMenu">
+            <div class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="userDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                <img src="" alt="Avatar" class="avatar" id="userAvatar" />
+                <span id="username"></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                <li><a class="dropdown-item" href="/progress">Progress</a></li>
+                <li>
+                  <a class="dropdown-item" href="/achievements">Achievements</a>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#" id="logoutBtn">Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Leaderboard Section -->
+    <section class="leaderboard-section py-5">
+      <div class="container">
+        <h2 class="text-center mb-4">Leaderboard</h2>
+
+        <!-- Filters -->
+        <div class="row mb-4">
+          <div class="col-md-4">
+            <select class="form-select" id="timeFilter">
+              <option value="all">All Time</option>
+              <option value="monthly">This Month</option>
+              <option value="weekly">This Week</option>
+              <option value="daily">Today</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <select class="form-select" id="categoryFilter">
+              <option value="all">All Categories</option>
+              <option value="algorithms">Algorithms</option>
+              <option value="web">Web Development</option>
+              <option value="mobile">Mobile Development</option>
+              <option value="ai">Artificial Intelligence</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="input-group-text">
+                <i class="fas fa-search"></i>
+              </span>
+              <input
+                type="text"
+                class="form-control"
+                id="searchInput"
+                placeholder="Search users..."
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Leaderboard Table -->
+        <div class="card">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>User</th>
+                    <th>Points</th>
+                    <th>Challenges</th>
+                    <th>Level</th>
+                    <th>Streak</th>
+                  </tr>
+                </thead>
+                <tbody id="leaderboardTable">
+                  <!-- Leaderboard data will be loaded dynamically -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Pagination -->
+            <nav class="mt-4">
+              <ul class="pagination justify-content-center" id="pagination">
+                <!-- Pagination will be loaded dynamically -->
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+        <!-- Top 3 Users -->
+        <div class="row mt-5">
+          <div class="col-md-4">
+            <div class="card text-center second-place">
+              <div class="card-body">
+                <div class="position-relative mb-3">
+                  <i class="fas fa-medal fa-3x text-secondary"></i>
+                </div>
+                <img
+                  src=""
+                  alt="Second Place"
+                  class="rounded-circle mb-3"
+                  id="secondPlaceAvatar"
+                />
+                <h4 id="secondPlaceUsername"></h4>
+                <p class="text-muted" id="secondPlacePoints"></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card text-center first-place">
+              <div class="card-body">
+                <div class="position-relative mb-3">
+                  <i class="fas fa-crown fa-3x text-warning"></i>
+                </div>
+                <img
+                  src=""
+                  alt="First Place"
+                  class="rounded-circle mb-3"
+                  id="firstPlaceAvatar"
+                />
+                <h4 id="firstPlaceUsername"></h4>
+                <p class="text-muted" id="firstPlacePoints"></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card text-center third-place">
+              <div class="card-body">
+                <div class="position-relative mb-3">
+                  <i class="fas fa-medal fa-3x text-warning"></i>
+                </div>
+                <img
+                  src=""
+                  alt="Third Place"
+                  class="rounded-circle mb-3"
+                  id="thirdPlaceAvatar"
+                />
+                <h4 id="thirdPlaceUsername"></h4>
+                <p class="text-muted" id="thirdPlacePoints"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h5>CodeCraft Academy</h5>
+            <p>
+              Learn programming through interactive challenges and real-world
+              projects.
+            </p>
+          </div>
+          <div class="col-md-4">
+            <h5>Quick Links</h5>
+            <ul class="list-unstyled">
+              <li><a href="/about" class="text-white">About Us</a></li>
+              <li><a href="/contact" class="text-white">Contact</a></li>
+              <li><a href="/faq" class="text-white">FAQ</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h5>Connect With Us</h5>
+            <div class="social-links">
+              <a href="#" class="text-white me-3"
+                ><i class="fab fa-github"></i
+              ></a>
+              <a href="#" class="text-white me-3"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="text-white"><i class="fab fa-discord"></i></a>
+            </div>
+          </div>
+        </div>
+        <hr class="my-4" />
+        <div class="text-center">
+          <p class="mb-0">
+            &copy; 2024 CodeCraft Academy. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/leaderboard.js"></script>
+  </body>
+</html>
